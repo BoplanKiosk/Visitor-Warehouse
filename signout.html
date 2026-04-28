@@ -5,9 +5,6 @@
   <title>Warehouse Sign Out</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Auto-return to kiosk home -->
-  <meta http-equiv="refresh" content="20;url=index.html">
-
   <style>
     body {
       margin: 0;
@@ -24,8 +21,27 @@
 </head>
 
 <body>
-  <iframe
-    src="https://forms.office.com/Pages/ResponsePage.aspx?id=KNeh0xlqoUujJKYQlBSKiawKi05lWTZMtl4lHmgYgXJURTk2MElMRFNVRzMyMlFWREFNWFc1VUtRMC4u">
+
+  https://forms.office.com/Pages/ResponsePage.aspx?id=KNeh0xlqoUujJKYQlBSKiawKi05lWTZMtl4lHmgYgXJURTk2MElMRFNVRzMyMlFWREFNWFc1VUtRMC4u
   </iframe>
+
+  <script>
+    let idleTimer;
+    const IDLE_TIMEOUT = 45000; // ✅ 45 seconds (recommended for sign-out)
+
+    function resetTimer() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        window.location.href = "index.html";
+      }, IDLE_TIMEOUT);
+    }
+
+    ["touchstart", "touchmove", "mousedown", "mousemove", "keydown"].forEach(event => {
+      document.addEventListener(event, resetTimer, { passive: true });
+    });
+
+    resetTimer();
+  </script>
+
 </body>
 </html>
